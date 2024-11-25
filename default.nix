@@ -3,11 +3,12 @@
 }:
 pkgs.python3Packages.buildPythonApplication {
   pname = "nix-update";
-  version = "1.5.2";
+  version = "1.7.0";
   src = ./.;
   pyproject = true;
   buildInputs = [ pkgs.makeWrapper ];
   build-system = [ pkgs.python3Packages.setuptools ];
+  propagatedBuildInputs = [ pkgs.python3Packages.packaging ];
   nativeBuildInputs = [
     pkgs.nixVersions.stable
     pkgs.nix-prefetch-git
@@ -26,6 +27,7 @@ pkgs.python3Packages.buildPythonApplication {
       pkgs.nixVersions.stable
       pkgs.nixpkgs-review
       pkgs.nix-prefetch-git
+      pkgs.nix-output-monitor
     ])
   ];
 }

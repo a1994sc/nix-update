@@ -32,7 +32,7 @@
             ...
           }:
           {
-            packages.nix-update = pkgs.callPackage ./. { };
+            packages.nix-update = pkgs.callPackage ./. { inherit pkgs; };
             packages.default = config.packages.nix-update;
 
             devShells.default = pkgs.mkShell {

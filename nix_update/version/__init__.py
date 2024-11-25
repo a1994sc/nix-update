@@ -4,6 +4,8 @@ from functools import partial
 from typing import Protocol
 from urllib.parse import ParseResult
 
+from packaging.version import Version
+
 from ..errors import VersionError
 from .bitbucket import fetch_bitbucket_snapshots, fetch_bitbucket_versions
 from .crate import fetch_crate_versions
@@ -122,7 +124,8 @@ def fetch_latest_version(
                 if ver is not None and ver.rev != old_rev:
                     return ver
 
-            return final[0]
+            final.sort(key=Version)
+            return final[-1]
 
     if filtered:
         raise VersionError(
